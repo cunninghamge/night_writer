@@ -7,20 +7,28 @@ class Line
   end
 
   def split_at_max_characters
-    split_line = @incoming
+    split_line = @incoming.dup
     new_array = []
-    until split_line == " \n"
+    until split_line.strip == ""
       line = split_line.split.reduce("") do |new_line, word|
         new_line.concat(word, " ") if (new_line.length + word.length) <= 40
         new_line
-      end
+      end.strip
       new_array << line
-      split_line.slice!(line.strip)
+      split_line.slice!(line)
     end
     new_array
   end
 
   def translate_character(character)
-    @parent.look_up(character)
+    @parent.translate_character(character)
+  end
+
+  def translate_line
+    split_at_max_characters.flat_map do |string|
+      string.chars.flat_map do |char|
+        translate_character(char)
+      end
+    end
   end
 end

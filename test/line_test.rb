@@ -7,6 +7,7 @@ class LineTest < Minitest::Test
   def setup
     line = "this sentence has more than forty characters.\n"
     @parent = mock("Translator")
+    @parent.stubs(:translate_character, "a").returns(["0.", "..", ".."])
     @line = Line.new(line, @parent)
   end
 
@@ -19,12 +20,18 @@ class LineTest < Minitest::Test
   end
 
   def test_split_at_max_characters
-    expected = ["this sentence has more than forty ", "characters. "]
+    expected = ["this sentence has more than forty", "characters."]
     assert_equal expected, @line.split_at_max_characters
   end
 
   def test_translate_character
-    @parent.stubs(:look_up).returns(["0.", "..", ".."])
+    @parent.stubs(:translate_character).returns(["0.", "..", ".."])
     assert_equal ["0.", "..", ".."], @line.translate_character("a")
+  end
+
+  def test_translate_line
+    line1 = Line.new("a\n", @parent)
+    @parent.stubs(:translate_character).returns(["0.", "..", ".."])
+    assert_equal ["0.", "..", ".."], line1.translate_line
   end
 end
