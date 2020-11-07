@@ -1,12 +1,10 @@
 class NightWriter
-  # reader = ARGV[0]
-
   def inspect
-    "Created 'braille.txt' containing 256 characters"
+    "Created '#{ARGV[1]}' containing 256 characters"
   end
 end
 
 
 night_writer = NightWriter.new
 
-puts night_writer.inspect
+night_writer.inspect
