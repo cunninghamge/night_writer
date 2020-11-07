@@ -5,7 +5,8 @@ require './lib/line'
 class LineTest < Minitest::Test
   def setup
     line = "this sentence has more than forty characters.\n"
-    @line = Line.new(line)
+    parent = mock("Translator")
+    @line = Line.new(line, parent)
   end
 
   def test_it_exists

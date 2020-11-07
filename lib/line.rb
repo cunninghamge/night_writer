@@ -1,8 +1,9 @@
 class Line
   attr_reader :incoming
 
-  def initialize(line)
+  def initialize(line, parent)
     @incoming = line
+    @parent = parent
   end
 
   def split_at_max_characters
@@ -18,6 +19,4 @@ class Line
     end
     new_array
   end
-
-
 end
