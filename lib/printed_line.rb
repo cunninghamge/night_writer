@@ -1,4 +1,4 @@
-class Line
+class PrintedLine
   attr_reader :printed
 
   def initialize(line, parent)

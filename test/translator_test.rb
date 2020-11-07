@@ -2,7 +2,7 @@ require "minitest/autorun"
 require "minitest/pride"
 require 'mocha/minitest'
 require './lib/translator'
-require './lib/line'
+require './lib/printed_line'
 
 class TranslatorTest < Minitest::Test
   def setup
@@ -23,7 +23,7 @@ class TranslatorTest < Minitest::Test
     actual = @translator.parse_lines
     assert_instance_of Array, actual
     all_lines = actual.all? do |line|
-      line.class == Line
+      line.class == PrintedLine
     end
     assert_equal true, all_lines
   end

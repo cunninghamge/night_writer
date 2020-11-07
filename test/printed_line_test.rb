@@ -1,17 +1,17 @@
 require "minitest/autorun"
 require "minitest/pride"
 require "mocha/minitest"
-require './lib/line'
+require './lib/printed_line'
 
-class LineTest < Minitest::Test
+class PrintedLineTest < Minitest::Test
   def setup
     line = "this sentence has more than forty characters.\n"
     @parent = mock("Translator")
-    @line = Line.new(line, @parent)
+    @line = PrintedLine.new(line, @parent)
   end
 
   def test_it_exists
-    assert_instance_of Line, @line
+    assert_instance_of PrintedLine, @line
   end
 
   def test_attributes
@@ -29,11 +29,11 @@ class LineTest < Minitest::Test
   end
 
   def test_translate_line
-    line1 = Line.new("a\n", @parent)
+    line1 = PrintedLine.new("a\n", @parent)
     @parent.stubs(:translate_character).returns(["0.", "..", ".."])
     assert_equal [[["0.", "..", ".."]]], line1.translate_line
 
-    line2 = Line.new("aa\n", @parent)
+    line2 = PrintedLine.new("aa\n", @parent)
     @parent.stubs(:translate_character).returns(["0.", "..", ".."])
     assert_equal [[["0.", "..", ".."], ["0.", "..", ".."]]], line2.translate_line
   end
