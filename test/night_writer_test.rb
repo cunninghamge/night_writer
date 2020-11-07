@@ -5,7 +5,7 @@ require './lib/night_writer'
 
 class NightWriterTest < Minitest::Test
   def setup
-    ARGV.replace ['./data/one_char.txt', 'braille.txt']
+    ARGV.replace(['./data/one_char.txt', 'braille.txt'])
     @night_writer = NightWriter.new
   end
 
@@ -45,7 +45,7 @@ class NightWriterTest < Minitest::Test
   end
 
   def test_read_incoming
-    assert_equal "a\n", @night_writer.read_incoming
+    assert_equal ["a\n"], @night_writer.read_incoming
   end
 
   def test_translate_to_braille

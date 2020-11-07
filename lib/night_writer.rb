@@ -6,16 +6,16 @@ class NightWriter
   end
 
   def read_incoming
-    File.read(ARGV[0])
+    File.readlines(ARGV[0])
   end
 
   def translate_to_braille
-    @incoming
+    @incoming.join
   end
 
   def write_to_file
     writer = File.open(ARGV[1], "w")
-    writer.write(@incoming)
+    writer.write(@braille)
     writer.close
   end
 
