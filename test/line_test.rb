@@ -7,7 +7,6 @@ class LineTest < Minitest::Test
   def setup
     line = "this sentence has more than forty characters.\n"
     @parent = mock("Translator")
-    @parent.stubs(:translate_character, "a").returns(["0.", "..", ".."])
     @line = Line.new(line, @parent)
   end
 
@@ -32,6 +31,10 @@ class LineTest < Minitest::Test
   def test_translate_line
     line1 = Line.new("a\n", @parent)
     @parent.stubs(:translate_character).returns(["0.", "..", ".."])
-    assert_equal ["0.", "..", ".."], line1.translate_line
+    assert_equal [[["0.", "..", ".."]]], line1.translate_line
+
+    line2 = Line.new("aa\n", @parent)
+    @parent.stubs(:translate_character).returns(["0.", "..", ".."])
+    assert_equal [[["0.", "..", ".."], ["0.", "..", ".."]]], line2.translate_line
   end
 end

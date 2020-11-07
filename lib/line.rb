@@ -25,8 +25,8 @@ class Line
   end
 
   def translate_line
-    split_at_max_characters.flat_map do |string|
-      string.chars.flat_map do |char|
+    split_at_max_characters.map do |string|
+      string.chars.map do |char|
         translate_character(char)
       end
     end
