@@ -35,4 +35,10 @@ class NightWriterTest < Minitest::Test
     message = ("Created 'braille.txt' containing 45 characters\n")
     assert_output(message) {puts night_writer.inspect}
   end
+
+  def test_write_to_output
+    @night_writer.write_to_file
+    assert_equal true, File.exist?('./braille.txt')
+    assert_equal "a\n", File.read('./braille.txt')
+  end
 end
