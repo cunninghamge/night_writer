@@ -1,17 +1,21 @@
 class NightWriter
-  attr_reader :incoming_text
 
   def initialize
-    @incoming_text = read_incoming
+    @plain = read_incoming
+    @braille = translate_to_braille
   end
 
   def read_incoming
     File.read(ARGV[0])
   end
 
+  def translate_to_braille
+    @plain
+  end
+
   def write_to_file
     writer = File.open(ARGV[1], "w")
-    writer.write(@incoming_text)
+    writer.write(@braille)
     writer.close
   end
 
