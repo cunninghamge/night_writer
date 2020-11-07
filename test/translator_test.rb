@@ -26,4 +26,8 @@ class TranslatorTest < Minitest::Test
     end
     assert_equal true, all_lines
   end
+
+  def test_translate_character
+    assert_equal ["0.", "..", ".."], @translator.look_up
+  end
 end

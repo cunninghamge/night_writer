@@ -12,4 +12,7 @@ class DictionaryTest < Minitest::Test
     assert_instance_of Dictionary, @dictionary
   end
 
+  def test_look_up
+    assert_equal ["0.", "..", ".."], @dictionary.look_up
+  end
 end
