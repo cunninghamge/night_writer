@@ -23,4 +23,14 @@ class NightWriterTest < Minitest::Test
     message = ("Created 'night_writer.txt' containing 256 characters\n")
     assert_output(message) {puts @night_writer.inspect}
   end
+
+  def test_numbeer_of_characters
+    ARGV[0] = './data/one_char'
+    message = ("Created 'braille.txt' containing 1 characters\n")
+    assert_output(message) {puts @night_writer.inspect}
+
+    ARGV[0] = './data/sentence'
+    message = ("Created 'braille.txt' containing 39 characters\n")
+    assert_output(message) {puts @night_writer.inspect}
+  end
 end
