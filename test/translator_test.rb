@@ -6,8 +6,8 @@ require './lib/line'
 
 class TranslatorTest < Minitest::Test
   def setup
-    incoming = File.readlines('./data/sentence.txt')
-    @translator = Translator.new(incoming)
+    printed = File.readlines('./data/sentence.txt')
+    @translator = Translator.new(printed)
   end
 
   def test_it_exists
@@ -16,7 +16,7 @@ class TranslatorTest < Minitest::Test
 
   def test_attributes
     expected = ["this sentence has more than forty characters.\n", "this one does not!\n"]
-    assert_equal expected, @translator.incoming
+    assert_equal expected, @translator.printed
   end
 
   def test_it_makes_lines

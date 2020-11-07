@@ -1,16 +1,16 @@
 class NightWriter
 
   def initialize
-    @incoming = read_incoming
+    @printed = read_printed
     @braille = translate_to_braille
   end
 
-  def read_incoming
+  def read_printed
     File.readlines(ARGV[0])
   end
 
   def translate_to_braille
-    @incoming.join
+    @printed.join
   end
 
   def write_to_file

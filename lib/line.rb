@@ -1,13 +1,14 @@
 class Line
-  attr_reader :incoming
+  attr_reader :printed
 
   def initialize(line, parent)
-    @incoming = line
+    @printed = line
     @parent = parent
+    @braille_lines = create_braille_lines
   end
 
   def split_at_max_characters
-    split_line = @incoming.dup
+    split_line = @printed.dup
     new_array = []
     until split_line.strip == ""
       line = split_line.split.reduce("") do |new_line, word|
@@ -22,6 +23,12 @@ class Line
 
   def translate_character(character)
     @parent.translate_character(character)
+  end
+
+  def create_braille_lines
+    split_at_max_characters.map do |string|
+      BrailleLine.new(string)
+    end
   end
 
   def translate_line
