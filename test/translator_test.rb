@@ -14,14 +14,16 @@ class TranslatorTest < Minitest::Test
   end
 
   def test_attributes
-    expected = ["this sentence has more than forty characters\n"]
+    expected = ["this sentence has more than forty characters.\n", "this one does not!\n"]
     assert_equal expected, @translator.incoming
   end
 
-  def test_parse_lines
+  def test_it_makes_lines
     actual = @translator.parse_lines
     assert_instance_of Array, actual
-    assert_instance_of Line, actual.map {|line| line}
-    # assert_equal expected, @translator.parse_lines
+    all_lines = actual.all? do |line|
+      line.class == Line
+    end
+    assert_equal true, all_lines
   end
 end
