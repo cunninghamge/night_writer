@@ -13,6 +13,15 @@ class NightWriterTest < Minitest::Test
   end
 
   def test_output
-    assert_output(/Created 'braille.txt' containing 256 characters/) {puts @night_writer.message}
+    @night_writer.stubs(:writer).returns('braille.txt')
+    message = (/Created 'braille.txt' containing 256 characters/)
+    assert_output(message) {puts @night_writer.inspect}
   end
+
+  def test_it_can_have_a_different_output
+    @night_writer.stubs(:writer).returns('night.txt')
+    message = (/Created 'night.txt' containing 256 characters/)
+    assert_output(message) {puts @night_writer.inspect}
+  end
+
 end

@@ -1,5 +1,7 @@
 class NightWriter
-  def message
+  # reader = ARGV[0]
+
+  def inspect
     "Created 'braille.txt' containing 256 characters"
   end
 end
@@ -7,4 +9,4 @@ end
 
 night_writer = NightWriter.new
 
-print night_writer.message
+puts night_writer.inspect
