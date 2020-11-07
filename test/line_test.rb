@@ -4,7 +4,7 @@ require './lib/line'
 
 class LineTest < Minitest::Test
   def setup
-    line = "this sentence has more than forty characters\n"
+    line = "this sentence has more than forty characters.\n"
     @line = Line.new(line)
   end
 
@@ -13,6 +13,11 @@ class LineTest < Minitest::Test
   end
 
   def test_attributes
-    assert_equal "this sentence has more than forty characters\n", @line.incoming
+    assert_equal "this sentence has more than forty characters.\n", @line.incoming
+  end
+
+  def test_split_at_max_characters
+    expected = ["this sentence has more than forty ", "characters. "]
+    assert_equal expected, @line.split_at_max_characters
   end
 end
