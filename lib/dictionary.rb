@@ -32,4 +32,8 @@ class Dictionary
   def initialize(parent)
     @parent = parent
   end
+
+  def look_up(character)
+    ALPHABET[character]
+  end
 end
