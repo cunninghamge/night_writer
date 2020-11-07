@@ -24,7 +24,7 @@ class LineTest < Minitest::Test
   end
 
   def test_translate_character
-    @parent.stubs(:get_character).returns(["0.", "..", ".."])
+    @parent.stubs(:look_up).returns(["0.", "..", ".."])
     assert_equal ["0.", "..", ".."], @line.translate_character("a")
   end
 end

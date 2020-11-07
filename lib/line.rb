@@ -19,4 +19,8 @@ class Line
     end
     new_array
   end
+
+  def translate_character(character)
+    @parent.look_up(character)
+  end
 end
