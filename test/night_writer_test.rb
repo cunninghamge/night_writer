@@ -42,4 +42,8 @@ class NightWriterTest < Minitest::Test
 
     File.delete('./braille.txt')
   end
+
+  def test_read_incoming
+    assert_equal "a\n", @night_writer.read_incoming
+  end
 end

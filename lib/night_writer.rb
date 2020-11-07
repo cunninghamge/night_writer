@@ -2,7 +2,11 @@ class NightWriter
   attr_reader :incoming_text
 
   def initialize
-    @incoming_text = File.read(ARGV[0])
+    @incoming_text = read_incoming
+  end
+
+  def read_incoming
+    File.read(ARGV[0])
   end
 
   def write_to_file
