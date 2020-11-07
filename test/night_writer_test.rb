@@ -30,14 +30,13 @@ class NightWriterTest < Minitest::Test
     message = ("Created 'braille.txt' containing 2 characters\n")
     assert_output(message) {puts @night_writer.inspect}
 
-    ARGV.replace(['./data/sentence.txt', 'braille.txt'])
+    ARGV[0] = './data/sentence.txt'
     night_writer = NightWriter.new
     message = ("Created 'braille.txt' containing 45 characters\n")
     assert_output(message) {puts night_writer.inspect}
   end
 
-  def test_write_to_output
-    @night_writer.write_to_file
+  def test_write_to_file
     assert_equal true, File.exist?('./braille.txt')
     assert_equal "a\n", File.read('./braille.txt')
   end
