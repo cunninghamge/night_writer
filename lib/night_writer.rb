@@ -11,11 +11,11 @@ class NightWriter
     writer.close
   end
 
-  def inspect
-    "Created '#{ARGV[1]}' containing #{@incoming_text.size} characters"
+  def ARGV.inspect
+    "Created '#{ARGV[1]}' containing #{File.read(ARGV[0]).size} characters"
   end
 end
 
-night_writer = NightWriter.new
+NightWriter.new
 
-puts night_writer.inspect
+puts ARGV.inspect

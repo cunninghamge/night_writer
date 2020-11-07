@@ -14,30 +14,32 @@ class NightWriterTest < Minitest::Test
   end
 
   def test_output
-    @night_writer.incoming_text.stubs(:size).returns(256)
-    message = ("Created 'braille.txt' containing 256 characters\n")
-    assert_output(message) {puts @night_writer.inspect}
+    message = ("Created 'braille.txt' containing 2 characters\n")
+    assert_output(message) {puts ARGV.inspect}
   end
 
   def test_it_can_have_a_different_output
     ARGV[1] = 'night_writer.txt'
-    @night_writer.incoming_text.stubs(:size).returns(256)
-    message = ("Created 'night_writer.txt' containing 256 characters\n")
-    assert_output(message) {puts @night_writer.inspect}
+    message = ("Created 'night_writer.txt' containing 2 characters\n")
+    assert_output(message) {puts ARGV.inspect}
   end
 
   def test_number_of_characters
     message = ("Created 'braille.txt' containing 2 characters\n")
-    assert_output(message) {puts @night_writer.inspect}
+    assert_output(message) {puts ARGV.inspect}
 
     ARGV[0] = './data/sentence.txt'
     night_writer = NightWriter.new
     message = ("Created 'braille.txt' containing 45 characters\n")
-    assert_output(message) {puts night_writer.inspect}
+    assert_output(message) {puts ARGV.inspect}
   end
 
   def test_write_to_file
+    @night_writer.write_to_file
+
     assert_equal true, File.exist?('./braille.txt')
     assert_equal "a\n", File.read('./braille.txt')
+
+    File.delete('./braille.txt')
   end
 end
