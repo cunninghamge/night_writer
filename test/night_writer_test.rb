@@ -5,8 +5,8 @@ require './lib/night_writer'
 
 class NightWriterTest < Minitest::Test
   def setup
+    ARGV.replace ['./data/one_char.txt', 'braille.txt']
     @night_writer = NightWriter.new
-    ARGV[1] = 'braille.txt'
   end
 
   def test_it_exists
@@ -14,23 +14,25 @@ class NightWriterTest < Minitest::Test
   end
 
   def test_output
+    @night_writer.incoming_text.stubs(:size).returns(256)
     message = ("Created 'braille.txt' containing 256 characters\n")
     assert_output(message) {puts @night_writer.inspect}
   end
 
   def test_it_can_have_a_different_output
     ARGV[1] = 'night_writer.txt'
+    @night_writer.incoming_text.stubs(:size).returns(256)
     message = ("Created 'night_writer.txt' containing 256 characters\n")
     assert_output(message) {puts @night_writer.inspect}
   end
 
-  def test_numbeer_of_characters
-    ARGV[0] = './data/one_char'
-    message = ("Created 'braille.txt' containing 1 characters\n")
+  def test_number_of_characters
+    message = ("Created 'braille.txt' containing 2 characters\n")
     assert_output(message) {puts @night_writer.inspect}
 
-    ARGV[0] = './data/sentence'
-    message = ("Created 'braille.txt' containing 39 characters\n")
-    assert_output(message) {puts @night_writer.inspect}
+    ARGV.replace(['./data/sentence.txt', 'braille.txt'])
+    night_writer = NightWriter.new
+    message = ("Created 'braille.txt' containing 45 characters\n")
+    assert_output(message) {puts night_writer.inspect}
   end
 end
