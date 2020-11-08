@@ -1,12 +1,13 @@
 require './lib/printed_line'
 require './lib/braille_line'
+require './lib/document'
 
 class LineParser
   attr_reader :printed_lines, :braille_lines
 
   def initialize(printed)
     @printed_lines = create_print_lines(printed)
-    # @braille_lines = create_braille_lines
+    Document.new(create_braille_lines)
   end
 
   def create_print_lines(printed)
