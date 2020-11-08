@@ -51,6 +51,7 @@ class NightWriterTest < Minitest::Test
   end
 
   def test_translate_to_braille
-    assert_equal "i am here\n", @night_writer.translate_to_braille
+    expected = ".0..0.00..0.0.0.0.\n0.........00.000.0\n......0.......0...\n"
+    assert_equal expected, @night_writer.translate_to_braille
   end
 end

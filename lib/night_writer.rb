@@ -14,7 +14,7 @@ class NightWriter
   end
 
   def translate_to_braille
-    @printed.join
+    @parser.compile_braille
   end
 
 
