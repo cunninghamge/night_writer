@@ -36,4 +36,12 @@ class BrailleParserTest < Minitest::Test
   def test_it_makes_printed_lines
     assert_equal "i am here\n", @parser.compile_print
   end
+
+  def test_a_multiple_lines
+    braille = File.readlines('./data/sentence_braille.txt')
+    parser = BrailleParser.new(braille)
+
+    expected = "this sentence has more than forty\ncharacters\nthis one does not\n"
+    assert_equal expected, parser.compile_print
+  end
 end

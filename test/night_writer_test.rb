@@ -4,22 +4,15 @@ require './lib/night_writer'
 class NightWriterTest < Minitest::Test
   def setup
     ARGV.replace(['./data/short.txt', 'braille.txt'])
+    @night_writer = NightWriter.new
   end
 
   def test_it_exists
-    night_writer = NightWriter.new
-
-    assert_instance_of NightWriter, night_writer
-
-    File.delete('./braille.txt')
+    assert_instance_of NightWriter, @night_writer
   end
 
   def test_it_makes_a_parser
-    night_writer = NightWriter.new
-
-    assert_instance_of LineParser, night_writer.parser
-
-    File.delete('./braille.txt')
+    assert_instance_of LineParser, @night_writer.parser
   end
 
   def test_output
@@ -54,10 +47,10 @@ class NightWriterTest < Minitest::Test
   end
 
   def test_read_printed
-    night_writer = NightWriter.new
+    assert_equal ["i am here\n"], @night_writer.read_printed
+  end
 
-    assert_equal ["i am here\n"], night_writer.read_printed
-
+  def teardown
     File.delete('./braille.txt')
   end
 end
