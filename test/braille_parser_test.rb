@@ -33,7 +33,7 @@ class BrailleParserTest < Minitest::Test
     assert_equal expected, @parser.separate_lines
   end
 
-  # def test_it_makes_printed_lines
-  #   # assert_equal ""
-  # end
+  def test_it_makes_printed_lines
+    assert_equal "i am here\n", @parser.compile_print
+  end
 end
