@@ -28,7 +28,7 @@ class NightWriterTest < Minitest::Test
 
     ARGV[0] = './data/sentence.txt'
     NightWriter.new
-    message = ("Created 'braille.txt' containing 65 characters\n")
+    message = ("Created 'braille.txt' containing 63 characters\n")
     assert_output(message) {puts ARGV.inspect}
   end
 

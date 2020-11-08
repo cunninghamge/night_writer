@@ -18,7 +18,7 @@ class LineParser
 
   def create_braille_lines
     @printed_lines.flat_map do |line|
-      split_at_max_char(line.text).map do |string|
+      split_at_max_char(line.text.dup).map do |string|
         BrailleLine.new(string)
       end
     end
@@ -39,5 +39,12 @@ class LineParser
       new_line.concat(word, " ") if (new_line.length + word.length) <= 40
       new_line
     end
+  end
+
+  def compile_braille
+    compiled = @braille_lines.reduce("") do |string, line|
+      string.concat(line.printable_braille, "\n")
+    end
+    compiled
   end
 end

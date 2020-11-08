@@ -1,8 +1,10 @@
 class NightWriter
+  attr_reader :parser, :printed
 
   def initialize
     @printed = read_printed
     @braille = translate_to_braille
+    @parser = LineParser.new(@printed)
   end
 
   def read_printed
