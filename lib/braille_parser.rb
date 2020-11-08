@@ -3,7 +3,7 @@ require './lib/braille_line'
 
 class BrailleParser
   attr_reader :braille_lines, :printed_lines
-  #
+
   def initialize(braille)
     @braille_lines = braille
     @printed_lines = create_print_lines
@@ -19,4 +19,10 @@ class BrailleParser
     @braille_lines.each_slice(3).to_a
   end
 
+  def compile_print
+    compiled = @printed_lines.reduce("") do |string, line|
+      string.concat(line.printed)
+    end
+    compiled
+  end
 end
