@@ -29,13 +29,17 @@ module Translator
            "z"=>["0.", ".0", "00"]
           }
 
-  def translate_char(character)
+  def to_braille(character)
     ALPHABET[character]
   end
 
-  def translate_line(line)
-    line.chars.map do |char|
-      translate_char(char)
+  def to_print(character)
+    ALPHABET.key(character)
+  end
+
+  def translate_line(line, method)
+    line.map do |char|
+      send(method, char)
     end
   end
 end
