@@ -6,17 +6,14 @@ class NightWriter
   def initialize
     @printed = read_printed
     @parser = LineParser.new(@printed)
-    @braille = @printed.join
+    @braille = @parser.compile_braille
+    write_to_file
   end
 
   def read_printed
+    require "pry"; binding.pry
     File.readlines(ARGV[0])
   end
-
-  def translate_to_braille
-    @parser.compile_braille
-  end
-
 
   def write_to_file
     writer = File.open(ARGV[1], "w")

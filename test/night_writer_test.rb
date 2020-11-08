@@ -8,6 +8,7 @@ class NightWriterTest < Minitest::Test
   end
 
   def test_it_exists
+    require "pry"; binding.pry
     assert_instance_of NightWriter, @night_writer
   end
 
@@ -22,17 +23,17 @@ class NightWriterTest < Minitest::Test
 
   def test_it_can_have_a_different_output
     ARGV[1] = 'night_writer.txt'
-    message = ("Created 'night_writer.txt' containing 10 characters\n")
+    message = "Created 'night_writer.txt' containing 10 characters\n"
     assert_output(message) {puts ARGV.inspect}
   end
 
   def test_number_of_characters
-    message = ("Created 'braille.txt' containing 10 characters\n")
+    message = "Created 'braille.txt' containing 10 characters\n"
     assert_output(message) {puts ARGV.inspect}
 
     ARGV[0] = './data/sentence.txt'
     NightWriter.new
-    message = ("Created 'braille.txt' containing 63 characters\n")
+    message = "Created 'braille.txt' containing 63 characters\n"
     assert_output(message) {puts ARGV.inspect}
   end
 
