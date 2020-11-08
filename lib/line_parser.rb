@@ -5,19 +5,13 @@ class LineParser
   attr_reader :printed_lines, :braille_lines
 
   def initialize(printed)
-    @printed_lines = create_print_lines(printed)
+    @printed_lines = printed
     @braille_lines = create_braille_lines
-  end
-
-  def create_print_lines(printed)
-    printed.each_with_object([]) do |line, all_lines|
-      all_lines << PrintedLine.new(line)
-    end
   end
 
   def create_braille_lines
     @printed_lines.flat_map do |line|
-      split_at_max_char(line.text.dup).map do |string|
+      split_at_max_char(line.dup).map do |string|
         BrailleLine.new(string)
       end
     end
