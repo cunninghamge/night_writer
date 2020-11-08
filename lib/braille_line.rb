@@ -1,13 +1,16 @@
-class BrailleLine
-  attr_reader :printed
-  attr_accessor :braille
+require './lib/translator'
 
-  def initialize(line)
-    @printed = line
-    @braille = []
+class BrailleLine
+  include Translator
+
+  attr_reader :printed, :braille
+
+  def initialize(printed)
+    @printed = printed
+    @braille = translate_line(printed)
   end
 
-  def printable
+  def printable_braille
     row0 = ""
     row1 = ""
     row2 = ""

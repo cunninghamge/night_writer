@@ -7,7 +7,7 @@ class LineParser
 
   def initialize(printed)
     @printed_lines = create_print_lines(printed)
-    Document.new(create_braille_lines)
+    @braille_lines = create_braille_lines
   end
 
   def create_print_lines(printed)
