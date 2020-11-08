@@ -1,11 +1,9 @@
-require "minitest/autorun"
-require "minitest/pride"
-require 'mocha/minitest'
+require_relative './test_helper'
 require './lib/translator'
 
 class TranslatorTest < Minitest::Test
   include Translator
-  
+
   def test_translate_char
     assert_equal ["0.", "..", ".."], translate_char("a")
     assert_equal ["0.", "00", "0."], translate_char("r")

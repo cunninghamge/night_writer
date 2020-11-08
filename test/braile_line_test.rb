@@ -1,6 +1,4 @@
-require "minitest/autorun"
-require "minitest/pride"
-require "mocha/minitest"
+require_relative './test_helper'
 require './lib/braille_line'
 
 class BrailleLineTest < Minitest::Test
