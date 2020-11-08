@@ -1,9 +1,18 @@
+require './lib/translator'
+
 class PrintedLine
-  attr_reader :braille
+  include Translator
+
+  attr_reader :braille, :printed
 
   def initialize(braille)
     @braille = braille
-    # @braille_chars = unzip_characters
+    braille_chars = create_characters
+    @printed = compile_line(braille_chars)
+  end
+
+  def compile_line(chars)
+    translate_line(chars, :to_print).join.concat("\n")
   end
 
   def create_characters
