@@ -1,3 +1,5 @@
+require './lib/line_parser'
+
 class NightWriter
   attr_reader :parser, :printed
 
