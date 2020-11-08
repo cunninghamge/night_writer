@@ -34,8 +34,8 @@ class Translator
   end
 
   def translate_line(line)
-    line.chars.each_with_object([]) do |char, array_obj|
-      array_obj << translate_char(char)
+    line.chars.map do |char|
+      translate_char(char)
     end
   end
 end

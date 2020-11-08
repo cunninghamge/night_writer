@@ -7,4 +7,10 @@ class Document
     @braille_lines = lines
     @translator = Translator.new
   end
+
+  def translate_lines
+    @braille_lines.each do |line|
+      line.braille = @translator.translate_line(line.printed)
+    end
+  end
 end
