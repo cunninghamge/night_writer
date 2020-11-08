@@ -11,7 +11,6 @@ class NightWriter
   end
 
   def read_printed
-    require "pry"; binding.pry
     File.readlines(ARGV[0])
   end
 
@@ -26,6 +25,6 @@ class NightWriter
   end
 end
 
-NightWriter.new
+# night_writer = NightWriter.new
 
 puts ARGV.inspect

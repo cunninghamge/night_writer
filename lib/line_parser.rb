@@ -1,6 +1,5 @@
 require './lib/printed_line'
 require './lib/braille_line'
-require './lib/document'
 
 class LineParser
   attr_reader :printed_lines, :braille_lines
