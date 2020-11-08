@@ -1,5 +1,3 @@
-require './lib/printed_line'
-
 class Translator
   ALPHABET = {
            " "=>["..", "..", ".."],
@@ -35,11 +33,9 @@ class Translator
     ALPHABET[character]
   end
 
-  # def translate_line
-  #   split_at_max_characters.map do |string|
-  #     string.chars.map do |char|
-  #       translate_character(char)
-  #     end
-  #   end
-  # end
+  def translate_line(line)
+    line.chars.each_with_object([]) do |char, array_obj|
+      array_obj << translate_char(char)
+    end
+  end
 end
