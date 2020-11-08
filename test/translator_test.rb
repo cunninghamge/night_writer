@@ -2,28 +2,21 @@ require "minitest/autorun"
 require "minitest/pride"
 require 'mocha/minitest'
 require './lib/translator'
-require './lib/printed_line'
 
 class TranslatorTest < Minitest::Test
-  def setup
-    @translator = Translator.new
-  end
-
-  def test_it_exists
-    assert_instance_of Translator, @translator
-  end
-
+  include Translator
+  
   def test_translate_char
-    assert_equal ["0.", "..", ".."], @translator.translate_char("a")
-    assert_equal ["0.", "00", "0."], @translator.translate_char("r")
-    assert_equal ["00", "00", ".."], @translator.translate_char("g")
+    assert_equal ["0.", "..", ".."], translate_char("a")
+    assert_equal ["0.", "00", "0."], translate_char("r")
+    assert_equal ["00", "00", ".."], translate_char("g")
   end
 
   def test_translate_line
     line1 = "a"
-    assert_equal [["0.", "..", ".."]], @translator.translate_line(line1)
+    assert_equal [["0.", "..", ".."]], translate_line(line1)
 
     line2 = "ab"
-    assert_equal [["0.", "..", ".."], ["0.", "0.", ".."]], @translator.translate_line(line2)
+    assert_equal [["0.", "..", ".."], ["0.", "0.", ".."]], translate_line(line2)
   end
 end

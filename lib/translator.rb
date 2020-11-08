@@ -1,4 +1,4 @@
-class Translator
+module Translator
   ALPHABET = {
            " "=>["..", "..", ".."],
            "a"=>["0.", "..", ".."],
