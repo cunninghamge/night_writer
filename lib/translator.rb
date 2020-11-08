@@ -11,4 +11,12 @@ class Translator
   def translate_character(character)
     @dictionary.look_up(character)
   end
+
+  # def translate_line
+  #   split_at_max_characters.map do |string|
+  #     string.chars.map do |char|
+  #       translate_character(char)
+  #     end
+  #   end
+  # end
 end
