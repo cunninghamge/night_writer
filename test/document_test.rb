@@ -2,6 +2,7 @@ require "minitest/autorun"
 require "minitest/pride"
 require 'mocha/minitest'
 require './lib/document'
+require './lib/translator'
 
 class DocumentTest < Minitest::Test
   def setup
@@ -16,5 +17,9 @@ class DocumentTest < Minitest::Test
 
   def test_it_has_lines
     assert_equal [@braille_line1, @braille_line2], @doc.braille_lines
+  end
+
+  def test_it_makes_a_translator
+    assert_instance_of Translator, @doc.translator
   end
 end
