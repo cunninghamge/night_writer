@@ -34,6 +34,8 @@ class FileIOTest < Minitest::Test
 
     expected = ".0..0.00..0.0.0.0.\n0.........00.000.0\n......0.......0...\n"
     assert_equal expected, File.read('./braille.txt')
+
+    File.delete('./braille.txt')
   end
 
   def test_it_also_reads_braille
@@ -45,10 +47,7 @@ class FileIOTest < Minitest::Test
     @io_to_print.write_to_file("i am here\n")
 
     assert_equal "i am here\n", File.read('./message.txt')
-  end
 
-  def teardown
     File.delete('./message.txt')
-    File.delete('./braille.txt')
   end
 end

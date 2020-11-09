@@ -1,30 +1,21 @@
+require './lib/file_io'
 require './lib/line_parser'
 
 class NightWriter
-  attr_reader :parser, :printed
+  attr_reader :file, :parser, :printed, :braille
 
   def initialize
-    @printed = read_printed
+    @file = FileIO.new(ARGV)
+    @printed = @file.read
     @parser = LineParser.new(@printed)
     @braille = @parser.compile_braille
-    write_to_file
+    @file.write_to_file(@braille)
+    puts message
   end
 
-  def read_printed
-    File.readlines(ARGV[0])
-  end
-
-  def write_to_file
-    writer = File.open(ARGV[1], "w")
-    writer.write(@braille)
-    writer.close
-  end
-
-  def ARGV.inspect
+  def message
     "Created '#{ARGV[1]}' containing #{File.read(ARGV[0]).size} characters"
   end
 end
 
-# NightWriter.new
-
-puts ARGV.inspect
+NightWriter.new
