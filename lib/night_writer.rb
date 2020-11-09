@@ -1,16 +1,8 @@
-require './lib/file_io'
-require './lib/line_parser'
+require './lib/translator'
 
 class NightWriter
-  attr_reader :file, :parser, :printed, :braille
-
   def initialize
-    @file = FileIO.new(ARGV)
-    @printed = @file.read
-    @parser = LineParser.new(@printed)
-    @braille = @parser.compile_braille
-    @file.write_to_file(@braille)
-    puts message
+    Translator.new(ARGV)
   end
 
   def message
@@ -18,4 +10,6 @@ class NightWriter
   end
 end
 
-NightWriter.new
+night_writer = NightWriter.new
+
+puts night_writer.message
