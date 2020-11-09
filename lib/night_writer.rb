@@ -26,5 +26,5 @@ class NightWriter
 end
 
 # NightWriter.new
-#
-# puts ARGV.inspect
+
+puts ARGV.inspect

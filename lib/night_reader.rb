@@ -29,4 +29,4 @@ end
 
 # NightReader.new
 #
-# puts ARGV.inspect
+puts ARGV.inspect
