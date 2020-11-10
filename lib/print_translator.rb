@@ -38,13 +38,28 @@ class PrintTranslator
   end
 
   def remove_special_characters(compiled)
+    remove_pound(remove_shift(compiled))
+  end
+
+  def remove_shift(compiled)
     last = ""
     compiled.chars.reduce("") do |string, char|
-      if char != "S" && char != "#" && last != "S" && last != "#"
+      if last != "S" && char != "S"
         string.concat(char)
-      elsif last == "S"
+      elsif char != "S"
         string.concat(char.upcase)
-      elsif last == "#"
+      end
+      last = char unless char == "\n"
+      string
+    end
+  end
+
+  def remove_pound(compiled)
+    last = ""
+    compiled.chars.reduce("") do |string, char|
+      if last != "#" && char != "#"
+        string.concat(char)
+      elsif char != "#"
         string.concat(convert_to_number(char))
       end
       last = char unless char == "\n"
