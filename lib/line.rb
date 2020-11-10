@@ -11,8 +11,12 @@ class Line
     @translated_text = []
   end
 
-  def translate(method)
-    @translated_text = translate_line(@incoming_text.chars, method)
+  def translate_to_braille
+    @translated_text = translate_line(@incoming_text.chars, :to_braille)
+  end
+
+  def translate_to_print
+    @translated_text = translate_line(@incoming_text, :to_print)
   end
 
   def printable_braille
@@ -25,5 +29,9 @@ class Line
       row2.concat(char[2])
     end
     row0 + "\n" + row1 + "\n" + row2
+  end
+
+  def printable_text
+    @translated_text.join.concat("\n")
   end
 end
