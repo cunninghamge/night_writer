@@ -26,6 +26,9 @@ class PrintParserTest < Minitest::Test
   def test_select_words
     text = "this sentence has more than forty characters.\n"
     assert_equal "this sentence has more than forty", @parser.select_words(text)
+
+    text = text = " !',-.?abcdefghijklmnopqrstuvwxyzSaSbScSdSeSfSgShSiSjSkSlSmSnSoSpSqSrSsStSuSvSwSxSySz"
+    assert_equal " !',-.?abcdefghijklmnopqrstuvwxyzSaSbScS", @parser.select_words(text)
   end
 
   def test_split_with_spaces
