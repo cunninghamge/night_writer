@@ -47,4 +47,9 @@ class DictionaryTest < Minitest::Test
     assert_equal ["..", "00", ".0"], to_braille(".")
     assert_equal ["..", "0.", "00"], to_braille("?")
   end
+
+  def test_dictionary
+    assert_instance_of Hash, dictionary
+    assert_equal 45, dictionary.size
+  end
 end

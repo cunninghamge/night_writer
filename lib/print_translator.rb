@@ -32,8 +32,32 @@ class PrintTranslator
 
   def compile_lines
     compiled = @lines.reduce("") do |string, line|
-      string.concat(line.printable_text)
+      string.concat(line.printable_text, "\n")
     end
-    compiled
+    remove_special_characters(compiled)
+  end
+
+  def remove_special_characters(compiled)
+    last = ""
+    compiled.chars.reduce("") do |string, char|
+      if char != "S" && char != "#" && last != "S" && last != "#"
+        string.concat(char)
+      elsif last == "S"
+        string.concat(char.upcase)
+      elsif last == "#"
+        string.concat(convert_to_number(char))
+      end
+      last = char unless char == "\n"
+      string
+    end
+  end
+
+  def convert_to_number(char)
+    numbers[char]
+  end
+
+  def numbers
+    {"a"=>"1","b"=>"2","c"=>"3","d"=>"4","e"=>"5",
+      "f"=>"6","g"=>"7","h"=>"8","i"=>"9","j"=>"0"}
   end
 end
