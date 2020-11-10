@@ -5,43 +5,27 @@ require './lib/braille_line'
 
 class BrailleParserTest < Minitest::Test
   def setup
-    @braille = File.readlines('./data/short_braille.txt')
-    @parser = BrailleParser.new(@braille)
+    @incoming = File.readlines('./data/three_braille.txt')
+    @parser = BrailleParser.new(@incoming)
   end
 
   def test_it_exists
     assert_instance_of BrailleParser, @parser
   end
 
-  def test_braille_lines
-    expected = [".0..0.00..0.0.0.0.\n", "0.........00.000.0\n", "......0.......0...\n"]
-    assert_equal expected, @parser.braille_lines
-  end
-
-  def test_it_makes_lines
-    actual = @parser.create_print_lines
-    all_printed = actual.all? do |line|
-      line.class == PrintedLine
-    end
-
-    assert_instance_of Array, actual
-    assert_equal true, all_printed
-  end
-
   def test_separate_lines
-    expected = [[".0..0.00..0.0.0.0.\n", "0.........00.000.0\n", "......0.......0...\n"]]
+    expected = [["0...0...00\n", "....0.....\n", "..........\n"]]
     assert_equal expected, @parser.separate_lines
   end
 
-  def test_it_makes_printed_lines
-    assert_equal "i am here\n", @parser.compile_print
+  def test_separate_braille_lines
+    expected = [[["0.", "..", ".."], ["..", "..", ".."], ["0.", "0.", ".."], ["..", "..", ".."], ["00", "..", ".."]]]
+    assert_equal expected, @parser.separate_braille_lines
   end
 
-  def test_a_multiple_lines
-    braille = File.readlines('./data/sentence_braille.txt')
-    parser = BrailleParser.new(braille)
-
-    expected = "this sentence has more than forty\ncharacters\nthis one does not\n"
-    assert_equal expected, parser.compile_print
+  def test_separate_braille_chars
+    line = ["0...0...00\n", "....0.....\n", "..........\n"]
+    expected = [["0.", "..", ".."], ["..", "..", ".."], ["0.", "0.", ".."], ["..", "..", ".."], ["00", "..", ".."]]
+    assert_equal expected, @parser.separate_characters(line)
   end
 end
