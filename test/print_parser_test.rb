@@ -34,24 +34,32 @@ class PrintParserTest < Minitest::Test
   end
 
   def test_reduce_to_40
-    text = " !',-.?abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
-    assert_equal " !',-.?abcdefghijklmnopqrstuvwxyzABC", @parser.reduce_to_40(text)
+    text = " !',-.?abcdefghijklmnopqrstuvwxyzSaSbScSdSeSfSgShSiSjSkSlSmSnSoSpSqSrSsStSuSvSwSxSySz"
+    assert_equal " !',-.?abcdefghijklmnopqrstuvwxyzSaSbScS", @parser.reduce_to_40(text)
+  end
+
+  def test_insert_special_chars
+    assert_equal "w#0Srd", @parser.insert_special_chars("w0Rd")
+  end
+
+  def test_upcase
+    assert_equal true, @parser.upcase?("K")
+    assert_equal false, @parser.upcase?("k")
+  end
+
+  def test_number
+    assert_equal true, @parser.number?("7")
+    assert_equal false, @parser.number?("b")
+    assert_equal false, @parser.number?("B")
   end
 
   def test_check_length
-    selected = "41 characters if we count "
+    selected = "#4#1 characters if we count "
     word = "numbers"
     assert_equal true, @parser.check_length(selected, word)
 
-    selected = "41 characters if we count numbers "
+    selected = "#4#1 characters if we count numbers "
     word = "twice"
     assert_equal false, @parser.check_length(selected, word)
-  end
-
-  def test_word_length
-    assert_equal 4, @parser.word_length("word")
-    assert_equal 5, @parser.word_length("Word")
-    assert_equal 5, @parser.word_length("woRd")
-    assert_equal 5, @parser.word_length("w0rd")
   end
 end

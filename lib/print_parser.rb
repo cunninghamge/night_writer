@@ -5,7 +5,7 @@ class PrintParser
 
   def separate_print_lines
     @incoming.flat_map do |line|
-      split_at_max_char(line.dup)
+      split_at_max_char(insert_special_chars(line))
     end
   end
 
@@ -19,9 +19,29 @@ class PrintParser
     lines
   end
 
+  def insert_special_chars(text)
+    text.chars.reduce("") do |string, char|
+      if upcase?(char)
+        string.concat("S#{char.downcase}")
+      elsif number?(char)
+        string.concat("##{char}")
+      else
+        string.concat(char)
+      end
+    end
+  end
+
+  def upcase?(char)
+    [*"A".."Z"].include?(char)
+  end
+
+  def number?(char)
+    [*"0".."9"].include?(char)
+  end
+
   def select_words(text)
     split_with_spaces(text).reduce("") do |selected, word|
-      if word_length(word) > 40
+      if word.length > 40
         return reduce_to_40(word)
       elsif check_length(selected, word)
         selected.concat(word)
@@ -36,19 +56,13 @@ class PrintParser
   end
 
   def reduce_to_40(word)
-    until word_length(word) <= 40
+    until word.length <= 40
       word = word[0..-2]
     end
     word
   end
 
   def check_length(selected, word)
-    (word_length(selected) + word_length(word)) <= 40
-  end
-
-  def word_length(phrase)
-    split_with_spaces(phrase).reduce(0) do |count, word|
-      count + word.length + word.count(*"A-Z") + word.count(*"0-9")
-    end
+    (selected.length + word.length) <= 40
   end
 end

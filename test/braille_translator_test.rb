@@ -41,10 +41,28 @@ class BrailleTranslatorTest < Minitest::Test
     assert_equal expected, translator.lines[0].translated_text
   end
 
+  def test_translate_to_braille
+    line1 = "10"
+    expected = [[".0", ".0", "00"],["0.", "..", ".."],[".0", ".0", "00"],[".0", "00", ".."]]
+    assert_equal expected, translate_to_braille(line1)
+
+    line2 = "a 3"
+    expected = [["0.", "..", ".."],["..", "..", ".."],[".0", ".0", "00"],["00", "..", ".."]]
+    assert_equal expected, translate_to_braille(line2)
+  end
+
+  def test_upcase
+    
+  end
+
+  def test_number
+
+  end
+
   def test_compile_lines
     args = ['./data/short.txt', 'braille.txt']
     translator = BrailleTranslator.new(args)
-    
+
     expected = ".0..0.00..0.0.0.0.\n0.........00.000.0\n......0.......0...\n"
     assert_equal expected, translator.compile_lines
   end
