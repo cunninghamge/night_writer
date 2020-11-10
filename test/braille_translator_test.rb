@@ -33,12 +33,12 @@ class BrailleTranslatorTest < Minitest::Test
     assert_equal expected, @translator.separate_print_lines
   end
 
-  # def test_translate_lines
-  #   skip
-  #   @translator.translate_lines
-  #   expected = [["0.", "..", ".."], ["0.", "0.", ".."]]
-  #   assert_equal expected, @translator.lines[0].translated_text
-  # end
+  def test_translate_lines
+    args = ['./data/one_char.txt', 'braille.txt']
+    translator = BrailleTranslator.new(args)
+    expected = [["0.", "..", ".."]]
+    assert_equal expected, translator.lines[0].translated_text
+  end
   #
   # def test_compile_lines
   #   skip

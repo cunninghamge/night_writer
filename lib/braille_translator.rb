@@ -9,7 +9,7 @@ class BrailleTranslator
     @file_io = FileIO.new(args)
     @parser = PrintParser.new(@file_io.read)
     @lines = create_line_objects
-    # translate_lines(@lines)
+    translate_lines
     # writeable_lines = compile_lines
     # @file_io.write_to_file(writeable_lines)
   end
@@ -25,9 +25,9 @@ class BrailleTranslator
   end
   #
   def translate_lines
-  #   @lines.each do |line|
-  #     line.translate_line(printed.chars, :to_braille)
-  #   end
+    @lines.each do |line|
+      line.translate(:to_braille)
+    end
   end
   #
   def compile_lines
