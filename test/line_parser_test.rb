@@ -43,10 +43,10 @@ class LineParserTest < Minitest::Test
     assert_equal true, all_braille
   end
 
-  # def test_compile_braille
-  #   printed = File.readlines('./data/short.txt')
-  #   short_parser = LineParser.new(printed)
-  #   expected = ".0..0.00..0.0.0.0.\n0.........00.000.0\n......0.......0...\n"
-  #   assert_equal expected, short_parser.compile_braille
-  # end
+  def test_compile_braille
+    printed = File.readlines('./data/short.txt')
+    short_parser = LineParser.new(printed)
+    expected = ".0..0.00..0.0.0.0.\n0.........00.000.0\n......0.......0...\n"
+    assert_equal expected, short_parser.compile_braille
+  end
 end
