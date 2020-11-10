@@ -19,15 +19,17 @@ class Line
   end
 
   def printable_braille
-    row0 = ""
-    row1 = ""
-    row2 = ""
-    @translated_text.each do |char|
-      row0.concat(char[0])
-      row1.concat(char[1])
-      row2.concat(char[2])
+    zip_lines.reduce("") do |string_obj, line|
+      string_obj.concat(line, "\n")
     end
-    row0 + "\n" + row1 + "\n" + row2
+  end
+
+  def zip_lines
+    @translated_text.each_with_object(["","",""]) do |char, obj|
+      obj[0].concat(char[0])
+      obj[1].concat(char[1])
+      obj[2].concat(char[2])
+    end
   end
 
   def printable_text

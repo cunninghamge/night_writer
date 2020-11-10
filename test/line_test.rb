@@ -37,12 +37,20 @@ class LineTest < Minitest::Test
     assert_equal ["a","b"], @line4.translated_text
   end
 
-  def test_printable
+  def test_printable_braille
     @line1.translate_to_braille
     @line2.translate_to_braille
 
-    assert_equal "0.\n..\n..", @line1.printable_braille
-    assert_equal "0.0.\n..0.\n....", @line2.printable_braille
+    assert_equal "0.\n..\n..\n", @line1.printable_braille
+    assert_equal "0.0.\n..0.\n....\n", @line2.printable_braille
+  end
+
+  def test_zip_lines
+    @line1.translate_to_braille
+    @line2.translate_to_braille
+
+    assert_equal ["0.", "..", ".."], @line1.zip_lines
+    assert_equal ["0.0.", "..0.", "...."], @line2.zip_lines
   end
 
   def test_printable_text

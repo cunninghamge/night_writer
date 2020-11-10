@@ -5,7 +5,7 @@ class PrintParser
 
   def separate_print_lines
     @incoming.flat_map do |line|
-      split_at_max_char(insert_special_chars(line))
+      split_at_max_char(insert_special_chars(line.dup))
     end
   end
 
