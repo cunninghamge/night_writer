@@ -55,6 +55,14 @@ class PrintTranslatorTest < Minitest::Test
     assert_equal expected, translator.compile_lines
   end
 
+  def test_join_all_lines
+    args = ['./data/sentence_braille.txt', 'message.txt']
+    translator = PrintTranslator.new(args)
+
+    expected = "this sentence has more than forty\ncharacters\nthis one does not\n"
+    assert_equal expected, translator.join_all_lines
+  end
+
   def test_remove_special_characters
     text = "#a#b#cSaSbSc\n"
 

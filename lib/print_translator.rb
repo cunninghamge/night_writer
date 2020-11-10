@@ -31,10 +31,13 @@ class PrintTranslator
   end
 
   def compile_lines
-    compiled = @lines.reduce("") do |string, line|
+    remove_special_characters(join_all_lines)
+  end
+
+  def join_all_lines
+    @lines.reduce("") do |string, line|
       string.concat(line.printable_text, "\n")
     end
-    remove_special_characters(compiled)
   end
 
   def remove_special_characters(compiled)
