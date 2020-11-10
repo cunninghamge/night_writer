@@ -1,8 +1,8 @@
-require './lib/translator'
+require './lib/braille_translator'
 
 class NightWriter
   def initialize
-    Translator.new(ARGV)
+    BrailleTranslator.new(ARGV)
   end
 
   def message
