@@ -29,18 +29,15 @@ class PrintTranslatorTest < Minitest::Test
   end
 
   def test_separate_braille_lines
-    args = ['./data/one_char_braille.txt', 'message.txt']
-    translator = PrintTranslator.new(args)
+    @translator.stubs(:separate_braille_lines).returns([[["0.", "..", ".."]]])
 
     expected = [[["0.", "..", ".."]]]
-    assert_equal expected, translator.separate_braille_lines
+    assert_equal expected, @translator.separate_braille_lines
   end
 
   def test_translate_lines
-    args = ['./data/one_char_braille.txt', 'braille.txt']
-    translator = PrintTranslator.new(args)
-
-    assert_equal ["a"], translator.lines[0].translated_text
+    expected = ["i", " ", "a", "m", " ", "h", "e", "r", "e"]
+    assert_equal expected, @translator.lines[0].translated_text
   end
 
   def test_compile_lines
@@ -48,19 +45,18 @@ class PrintTranslatorTest < Minitest::Test
   end
 
   def test_multiple_lines
-    args = ['./data/sentence_braille.txt', 'message.txt']
-    translator = PrintTranslator.new(args)
+    @translator.stubs(:join_all_lines).returns("this sentence has more than forty\ncharacters\nthis one does not\n")
 
     expected = "this sentence has more than forty\ncharacters\nthis one does not\n"
-    assert_equal expected, translator.compile_lines
+    assert_equal expected, @translator.compile_lines
   end
 
   def test_join_all_lines
-    args = ['./data/sentence_braille.txt', 'message.txt']
-    translator = PrintTranslator.new(args)
-
+    line1 = mock("line1")
+    @translator.lines.replace([line1])
+    line1.stubs(:printable_text).returns("this sentence has more than forty\ncharacters\nthis one does not")
     expected = "this sentence has more than forty\ncharacters\nthis one does not\n"
-    assert_equal expected, translator.join_all_lines
+    assert_equal expected, @translator.join_all_lines
   end
 
   def test_remove_special_characters
@@ -69,7 +65,7 @@ class PrintTranslatorTest < Minitest::Test
     assert_equal "123ABC\n", @translator.remove_special_characters(text)
   end
 
-  def test_remvove_shift
+  def test_remove_shift
     text = "#a#b#cSaSbSc\n"
 
     assert_equal "#a#b#cABC\n", @translator.remove_shift(text)
