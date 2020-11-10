@@ -1,30 +1,15 @@
-require './lib/line_parser'
+require './lib/braille_translator'
 
 class NightWriter
-  attr_reader :parser, :printed
-
   def initialize
-    @printed = read_printed
-    @parser = LineParser.new(@printed)
-    @braille = @parser.compile_braille
-    write_to_file
+    BrailleTranslator.new(ARGV)
   end
 
-  def read_printed
-    File.readlines(ARGV[0])
-  end
-
-  def write_to_file
-    writer = File.open(ARGV[1], "w")
-    writer.write(@braille)
-    writer.close
-  end
-
-  def ARGV.inspect
+  def message
     "Created '#{ARGV[1]}' containing #{File.read(ARGV[0]).size} characters"
   end
 end
 
-# NightWriter.new
-#
-# puts ARGV.inspect
+night_writer = NightWriter.new
+
+puts night_writer.message

@@ -1,8 +1,8 @@
 require_relative './test_helper'
-require './lib/translator'
+require './lib/dictionary'
 
-class TranslatorTest < Minitest::Test
-  include Translator
+class DictionaryTest < Minitest::Test
+  include Dictionary
 
   def test_translate_char_to_braille
     assert_equal ["0.", "..", ".."], to_braille("a")
@@ -39,7 +39,6 @@ class TranslatorTest < Minitest::Test
     assert_equal "-", to_print(["..", "..", "00"])
     assert_equal ".", to_print(["..", "00", ".0"])
     assert_equal "?", to_print(["..", "0.", "00"])
-    assert_equal ":", to_print(["..", "00", ".."])
 
     assert_equal ["..", "00", "0."], to_braille("!")
     assert_equal ["..", "..", "0."], to_braille("'")
@@ -47,6 +46,5 @@ class TranslatorTest < Minitest::Test
     assert_equal ["..", "..", "00"], to_braille("-")
     assert_equal ["..", "00", ".0"], to_braille(".")
     assert_equal ["..", "0.", "00"], to_braille("?")
-    assert_equal ["..", "00", ".."], to_braille(":")
   end
 end

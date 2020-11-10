@@ -1,28 +1,25 @@
-require './lib/printed_line'
-require './lib/braille_line'
-
 class BrailleParser
-  attr_reader :braille_lines, :printed_lines
-
-  def initialize(braille)
-    @braille_lines = braille
-    @printed_lines = create_print_lines
-  end
-
-  def create_print_lines
-    separate_lines.map do |line|
-      PrintedLine.new(line)
-    end
+  def initialize(incoming)
+    @incoming = incoming
   end
 
   def separate_lines
-    @braille_lines.each_slice(3).to_a
+    @incoming.each_slice(3).to_a
   end
 
-  def compile_print
-    compiled = @printed_lines.reduce("") do |string, line|
-      string.concat(line.printed)
+  def separate_braille_lines
+    separate_lines.map do |line|
+      separate_characters(line)
     end
-    compiled
+  end
+
+  def separate_characters(line)
+    split_strings = line.map do |string|
+      string.scan(/../)
+    end
+    row0 = split_strings[0]
+    row1 = split_strings[1]
+    row2 = split_strings[2]
+    row0.zip(row1, row2)
   end
 end
