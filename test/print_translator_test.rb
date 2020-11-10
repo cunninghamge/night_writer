@@ -84,9 +84,4 @@ class PrintTranslatorTest < Minitest::Test
   def test_convert_to_number
     assert_equal "1", @translator.convert_to_number("a")
   end
-
-  def test_number
-    expected = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "0"]
-    assert_equal expected, @translator.numbers.values
-  end
 end

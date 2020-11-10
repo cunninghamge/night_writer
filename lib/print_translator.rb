@@ -5,6 +5,9 @@ require './lib/line'
 class PrintTranslator
   attr_reader :file_io, :parser, :lines
 
+  NUMBERS = {"a"=>"1","b"=>"2","c"=>"3","d"=>"4","e"=>"5",
+             "f"=>"6","g"=>"7","h"=>"8","i"=>"9","j"=>"0"}
+
   def initialize(args)
     @file_io = FileIO.new(args)
     @parser = BrailleParser.new(@file_io.read)
@@ -71,11 +74,6 @@ class PrintTranslator
   end
 
   def convert_to_number(char)
-    numbers[char]
-  end
-
-  def numbers
-    {"a"=>"1","b"=>"2","c"=>"3","d"=>"4","e"=>"5",
-      "f"=>"6","g"=>"7","h"=>"8","i"=>"9","j"=>"0"}
+    NUMBERS[char]
   end
 end
