@@ -1,11 +1,9 @@
-require "minitest/autorun"
-require "minitest/pride"
-require 'mocha/minitest'
+require_relative './test_helper'
 require './lib/night_writer'
 
 class NightWriterTest < Minitest::Test
   def setup
-    ARGV.replace ['./data/one_char.txt', 'braille.txt']
+    ARGV.replace(['./data/one_char.txt', 'braille.txt'])
     @night_writer = NightWriter.new
   end
 
@@ -30,7 +28,7 @@ class NightWriterTest < Minitest::Test
 
     ARGV[0] = './data/sentence.txt'
     NightWriter.new
-    message = ("Created 'braille.txt' containing 45 characters\n")
+    message = ("Created 'braille.txt' containing 63 characters\n")
     assert_output(message) {puts ARGV.inspect}
   end
 
@@ -44,8 +42,8 @@ class NightWriterTest < Minitest::Test
     File.delete('./night_writer.txt')
   end
 
-  def test_read_incoming
-    assert_equal "a\n", @night_writer.read_incoming
+  def test_read_printed
+    assert_equal ["a\n"], @night_writer.read_printed
   end
 
   def test_translate_to_braille

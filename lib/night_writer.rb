@@ -1,16 +1,18 @@
 class NightWriter
+  attr_reader :parser, :printed
 
   def initialize
-    @plain = read_incoming
+    @printed = read_printed
     @braille = translate_to_braille
+    @parser = LineParser.new(@printed)
   end
 
-  def read_incoming
-    File.read(ARGV[0])
+  def read_printed
+    File.readlines(ARGV[0])
   end
 
   def translate_to_braille
-    @plain
+    @printed.join
   end
 
   def write_to_file
