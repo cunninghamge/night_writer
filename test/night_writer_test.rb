@@ -2,8 +2,6 @@ ARGV.replace(['./data/short.txt', 'braille.txt'])
 require_relative './test_helper'
 require './lib/night_writer'
 
-
-
 class NightWriterTest < Minitest::Test
   def setup
     @night_writer = NightWriter.new
