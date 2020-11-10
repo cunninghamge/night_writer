@@ -26,4 +26,10 @@ class BrailleParserTest < Minitest::Test
     expected = [["0.", "..", ".."], ["..", "..", ".."], ["0.", "0.", ".."], ["..", "..", ".."], ["00", "..", ".."]]
     assert_equal expected, @parser.separate_characters(line)
   end
+
+  def test_split_strings
+    line = ["0...0...00\n", "....0.....\n", "..........\n"]
+    expected = [["0.", "..", "0.", "..", "00"], ["..", "..", "0.", "..", ".."], ["..", "..", "..", "..", ".."]]
+    assert_equal expected, @parser.split_strings(line)
+  end
 end

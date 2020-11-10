@@ -14,12 +14,13 @@ class BrailleParser
   end
 
   def separate_characters(line)
-    split_strings = line.map do |string|
+    split = split_strings(line)
+    split[0].zip(split[1], split[2])
+  end
+
+  def split_strings(line)
+    line.map do |string|
       string.scan(/../)
     end
-    row0 = split_strings[0]
-    row1 = split_strings[1]
-    row2 = split_strings[2]
-    row0.zip(row1, row2)
   end
 end
