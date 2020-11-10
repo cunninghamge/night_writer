@@ -31,4 +31,22 @@ class TranslatorTest < Minitest::Test
     line2 = [["0.", "..", ".."], ["0.", "0.", ".."]]
     assert_equal ["a","b"], translate_line(line2, :to_print)
   end
+
+  def test_punctuation
+    assert_equal "!", to_print(["..", "00", "0."])
+    assert_equal "'", to_print(["..", "..", "0."])
+    assert_equal ",", to_print(["..", "0.", ".."])
+    assert_equal "-", to_print(["..", "..", "00"])
+    assert_equal ".", to_print(["..", "00", ".0"])
+    assert_equal "?", to_print(["..", "0.", "00"])
+    assert_equal ":", to_print(["..", "00", ".."])
+
+    assert_equal ["..", "00", "0."], to_braille("!")
+    assert_equal ["..", "..", "0."], to_braille("'")
+    assert_equal ["..", "0.", ".."], to_braille(",")
+    assert_equal ["..", "..", "00"], to_braille("-")
+    assert_equal ["..", "00", ".0"], to_braille(".")
+    assert_equal ["..", "0.", "00"], to_braille("?")
+    assert_equal ["..", "00", ".."], to_braille(":")
+  end
 end
