@@ -36,15 +36,16 @@ class BrailleTranslatorTest < Minitest::Test
   def test_translate_lines
     args = ['./data/one_char.txt', 'braille.txt']
     translator = BrailleTranslator.new(args)
+
     expected = [["0.", "..", ".."]]
     assert_equal expected, translator.lines[0].translated_text
   end
-  #
-  # def test_compile_lines
-  #   skip
-  #   printed = File.readlines('./data/short.txt')
-  #   translator = BrailleTranslator.new(printed)
-  #   expected = ".0..0.00..0.0.0.0.\n0.........00.000.0\n......0.......0...\n"
-  #   assert_equal expected, translator.compile_lines
-  # end
+
+  def test_compile_lines
+    args = ['./data/short.txt', 'braille.txt']
+    translator = BrailleTranslator.new(args)
+    
+    expected = ".0..0.00..0.0.0.0.\n0.........00.000.0\n......0.......0...\n"
+    assert_equal expected, translator.compile_lines
+  end
 end
