@@ -7,7 +7,7 @@ class BrailleLine
 
   def initialize(printed)
     @printed = printed
-    @braille = translate_line(printed)
+    @braille = translate_line(printed.chars, :to_braille)
   end
 
   def printable_braille

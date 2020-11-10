@@ -1,6 +1,5 @@
 require_relative './test_helper'
 require './lib/line_parser'
-require './lib/printed_line'
 require './lib/braille_line'
 
 class LineParserTest < Minitest::Test
@@ -11,15 +10,6 @@ class LineParserTest < Minitest::Test
 
   def test_it_exists
     assert_instance_of LineParser, @parser
-  end
-
-  def test_it_makes_lines
-    actual = @parser.create_print_lines(@printed)
-    assert_instance_of Array, actual
-    all_lines = actual.all? do |line|
-      line.class == PrintedLine
-    end
-    assert_equal true, all_lines
   end
 
   def test_split_at_max_characters
