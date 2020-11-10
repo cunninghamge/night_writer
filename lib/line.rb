@@ -3,8 +3,7 @@ require './lib/dictionary'
 class Line
   include Dictionary
 
-  attr_reader :incoming_text
-  attr_accessor :translated_text
+  attr_reader :incoming_text, :translated_text
 
   def initialize(incoming)
     @incoming_text = incoming

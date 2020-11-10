@@ -32,7 +32,7 @@ class BrailleTranslator
 
   def compile_lines
     compiled = @lines.reduce("") do |string, line|
-      string.concat(line.printable_braille)
+      string.concat(line.printable_braille, "\n")
     end
     compiled
   end
