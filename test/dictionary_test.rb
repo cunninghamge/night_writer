@@ -39,7 +39,6 @@ class DictionaryTest < Minitest::Test
     assert_equal "-", to_print(["..", "..", "00"])
     assert_equal ".", to_print(["..", "00", ".0"])
     assert_equal "?", to_print(["..", "0.", "00"])
-    assert_equal ":", to_print(["..", "00", ".."])
 
     assert_equal ["..", "00", "0."], to_braille("!")
     assert_equal ["..", "..", "0."], to_braille("'")
@@ -47,6 +46,5 @@ class DictionaryTest < Minitest::Test
     assert_equal ["..", "..", "00"], to_braille("-")
     assert_equal ["..", "00", ".0"], to_braille(".")
     assert_equal ["..", "0.", "00"], to_braille("?")
-    assert_equal ["..", "00", ".."], to_braille(":")
   end
 end

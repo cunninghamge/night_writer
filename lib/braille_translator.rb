@@ -26,7 +26,7 @@ class BrailleTranslator
 
   def translate_lines
     @lines.each do |line|
-      line.translate(:to_braille)
+      line.translate_to_braille
     end
   end
 

@@ -1,7 +1,5 @@
 require_relative './test_helper'
 require './lib/braille_parser'
-require './lib/printed_line'
-require './lib/braille_line'
 
 class BrailleParserTest < Minitest::Test
   def setup

@@ -10,4 +10,6 @@ class NightReader
   end
 end
 
-NightReader.new
+night_reader = NightReader.new
+
+puts night_reader.message
