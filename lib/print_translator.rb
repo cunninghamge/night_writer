@@ -5,6 +5,9 @@ require './lib/line'
 class PrintTranslator
   attr_reader :file_io, :parser, :lines
 
+  NUMBERS = {"a"=>"1","b"=>"2","c"=>"3","d"=>"4","e"=>"5",
+             "f"=>"6","g"=>"7","h"=>"8","i"=>"9","j"=>"0"}
+
   def initialize(args)
     @file_io = FileIO.new(args)
     @parser = BrailleParser.new(@file_io.read)
@@ -31,20 +34,38 @@ class PrintTranslator
   end
 
   def compile_lines
-    compiled = @lines.reduce("") do |string, line|
+    remove_special_characters(join_all_lines)
+  end
+
+  def join_all_lines
+    @lines.reduce("") do |string, line|
       string.concat(line.printable_text, "\n")
     end
-    remove_special_characters(compiled)
   end
 
   def remove_special_characters(compiled)
+    remove_pound(remove_shift(compiled))
+  end
+
+  def remove_shift(compiled)
     last = ""
     compiled.chars.reduce("") do |string, char|
-      if char != "S" && char != "#" && last != "S" && last != "#"
+      if last != "S" && char != "S"
         string.concat(char)
-      elsif last == "S"
+      elsif char != "S"
         string.concat(char.upcase)
-      elsif last == "#"
+      end
+      last = char unless char == "\n"
+      string
+    end
+  end
+
+  def remove_pound(compiled)
+    last = ""
+    compiled.chars.reduce("") do |string, char|
+      if last != "#" && char != "#"
+        string.concat(char)
+      elsif char != "#"
         string.concat(convert_to_number(char))
       end
       last = char unless char == "\n"
@@ -53,11 +74,6 @@ class PrintTranslator
   end
 
   def convert_to_number(char)
-    numbers[char]
-  end
-
-  def numbers
-    {"a"=>"1","b"=>"2","c"=>"3","d"=>"4","e"=>"5",
-      "f"=>"6","g"=>"7","h"=>"8","i"=>"9","j"=>"0"}
+    NUMBERS[char]
   end
 end
