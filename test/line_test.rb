@@ -49,7 +49,7 @@ class LineTest < Minitest::Test
     @line3.translate_to_print
     @line4.translate_to_print
 
-    assert_equal "a\n", @line3.printable_text
-    assert_equal "ab\n", @line4.printable_text
+    assert_equal "a", @line3.printable_text
+    assert_equal "ab", @line4.printable_text
   end
 end

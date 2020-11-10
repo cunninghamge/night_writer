@@ -32,6 +32,6 @@ class Line
   end
 
   def printable_text
-    @translated_text.join.concat("\n")
+    @translated_text.join
   end
 end

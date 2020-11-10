@@ -1,5 +1,6 @@
 require_relative './test_helper'
 require './lib/braille_translator'
+require './lib/line'
 
 class BrailleTranslatorTest < Minitest::Test
   def setup
@@ -29,7 +30,7 @@ class BrailleTranslatorTest < Minitest::Test
   end
 
   def test_separate_print_lines
-    expected = ["this sentence has more than forty", "characters", "this one does not"]
+    expected = ["this sentence has more than forty", " characters", "this one does not"]
     assert_equal expected, @translator.separate_print_lines
   end
 
@@ -41,11 +42,21 @@ class BrailleTranslatorTest < Minitest::Test
     assert_equal expected, translator.lines[0].translated_text
   end
 
+  def test_translate_to_braille
+    line1 = Line.new("#1#0")
+    expected = [[".0", ".0", "00"],["0.", "..", ".."],[".0", ".0", "00"],[".0", "00", ".."]]
+    assert_equal expected, line1.translate_to_braille
+
+    line2 = Line.new("a #3")
+    expected = [["0.", "..", ".."],["..", "..", ".."],[".0", ".0", "00"],["00", "..", ".."]]
+    assert_equal expected, line2.translate_to_braille
+  end
+
   def test_compile_lines
     args = ['./data/short.txt', 'braille.txt']
     translator = BrailleTranslator.new(args)
-    
-    expected = ".0..0.00..0.0.0.0.\n0.........00.000.0\n......0.......0...\n"
+
+    expected = ".0..0.00..0.0.0.0.\n0.........00.000.0\n......0.......0..."
     assert_equal expected, translator.compile_lines
   end
 end
